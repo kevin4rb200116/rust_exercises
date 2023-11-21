@@ -1,6 +1,6 @@
 [workspace]
 default-members = ["hello_world"]
-members = ["hello_world"]
+members = ["hello_world", "guessing_game"]
 resolver = "2"
 
 [workspace.package]
