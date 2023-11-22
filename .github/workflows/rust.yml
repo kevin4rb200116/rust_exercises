@@ -3,18 +3,28 @@ name: Rust CI
 on:
   push:
     branches:
+      - main
       - master
+    tags:
+      - '*'
   pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
       - name: Set up Rust
         uses: actions/checkout@v2
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Install cargo-audit
         run: cargo install cargo-audit
       - name: Build

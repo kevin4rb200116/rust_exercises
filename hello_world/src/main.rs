@@ -7,11 +7,10 @@ struct User {
 
 impl User {
     fn new() -> Self {
-        println!("Hello, what's your name?");
-
         let mut user_name = String::new();
         let mut user_age = String::new();
 
+        println!("Hello, what's your name?");
         io::stdin()
             .read_line(&mut user_name)
             .expect("Failed to read line");
@@ -33,6 +32,6 @@ impl User {
 fn main() {
     let user = User::new();
 
-    println!("Hello, {}", user.name);
+    print!("Hello, {}", user.name);
     println!("Wow your are {} years old!", user.age);
 }

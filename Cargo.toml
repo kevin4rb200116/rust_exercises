@@ -1,6 +1,9 @@
 [workspace]
-default-members = ["hello_world"]
-members = ["hello_world", "guessing_game"]
+members = [
+  "hello_world",
+  "guessing_game",
+  "pyword_counter"]
+
 resolver = "2"
 
 [workspace.package]
