@@ -10,3 +10,7 @@ resolver = "2"
 version = "0.1.0"
 authors = ["Kevin Rodriguez"]
 description = "my personal set of exercises"
+
+[profile.release]
+strip = true
+lto = true

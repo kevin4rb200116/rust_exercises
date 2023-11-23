@@ -47,38 +47,19 @@ jobs:
   release:
     needs: build
     runs-on: ubuntu-latest
-    # if: "github.event_name == 'create' && github.event.ref_type == 'tag'"
     steps:
       - name: Download Release Artifact
         uses: actions/download-artifact@v2
         with:
           name: release
-          path: ./release
-      - name: Create Release
+          path: target/release/
+      - name: Create Release Draft
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/release/hello_world
+            target/release/guessing_game
+          draft: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: true
-          prerelease: true
-      - name: Upload Release Assets
-        run: |
-          for file in ./target/release/*; do
-            if [ -f "$file" ]; then
-              case "$(file $file)" in
-                *"ELF"*"executable"*)
-                  echo "Uploading $file"
-                  curl \
-                    -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-                    -H "Content-Type: $(file -b --mime-type $file)" \
-                    --data-binary @"$file" \
-                    "${{ steps.create_release.outputs.upload_url }}?name=$(basename $file)_$(uname -m).elf"
-                  ;;
-                *)
-                  ;;
-              esac
-            fi
-          done
