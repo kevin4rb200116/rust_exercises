@@ -1,5 +1,5 @@
 [package]
-name = "hello_world"
+name = "basics"
 edition = "2021"
 version.workspace = true
 authors.workspace = true

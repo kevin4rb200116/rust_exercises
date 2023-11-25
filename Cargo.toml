@@ -1,6 +1,6 @@
 [workspace]
 members = [
-  "hello_world",
+  "basics",
   "guessing_game",
   "pyword_counter"]
 
