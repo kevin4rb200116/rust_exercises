@@ -59,7 +59,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            target/release/hello_world
+            target/release/basics
             target/release/guessing_game
           draft: true
         env:
